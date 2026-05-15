@@ -17,7 +17,7 @@ st.markdown(
 st.write("Enter your name and movie review.")
 
 # Load Dataset
-data = pd.read_csv("IMDB Dataset.csv")
+data = pd.read_csv("small_dataset.csv")
 
 # Clean Text Function
 def clean_text(text):
