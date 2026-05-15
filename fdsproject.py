@@ -25,7 +25,8 @@ def clean_text(text):
     text = re.sub(r"<.*?>", "", text)
     text = re.sub(r"[^a-zA-Z]", " ", text)
     text = text.split()
-    text = [word for word in text if word not in ENGLISH_STOP_WORDS]
+    custom_stopwords = ENGLISH_STOP_WORDS - {"not", "no", "never", "bad", "good"}
+    text = [word for word in text if word not in custom_stopwords]
     return " ".join(text)
 
 # Clean Reviews
@@ -42,7 +43,10 @@ X = data["clean_review"]
 y = data["sentiment"]
 
 # Vectorizer
-vectorizer = TfidfVectorizer(max_features=5000)
+vectorizer = TfidfVectorizer(
+    max_features=5000,
+    ngram_range=(1, 2)
+)
 
 X_vectorized = vectorizer.fit_transform(X)
 
